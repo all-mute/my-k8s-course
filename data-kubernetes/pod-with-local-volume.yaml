@@ -1,0 +1,17 @@
+---
+# pod-with-local-volume.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-using-local-volume
+spec:
+  containers:
+  - name: app-container-nginx
+    image: nginx:1.27.1
+    volumeMounts:
+      - mountPath: "/usr/share/nginx/html"
+        name: local-storage
+  volumes:
+  - name: local-storage
+    persistentVolumeClaim:
+      claimName: local-pvc
