@@ -1,0 +1,15 @@
+---
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80          # Порт, на котором Service будет доступен
+      targetPort: 80    # Порт в контейнере
+      nodePort: 30007   # Укажите порт для доступа снаружи (по умолчанию диапазон: 30000-32767)
+  type: LoadBalancer
