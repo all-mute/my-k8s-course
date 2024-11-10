@@ -1,0 +1,14 @@
+---
+# clusterrolebinding.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: view-nodes-binding
+subjects:
+  - kind: User
+    name: monitor-user
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: vies-node
+  apiGroup: rbac.authorization.k8s.io
