@@ -1,0 +1,17 @@
+---
+# role.yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: dev-team # Указываем Namespace
+  name: dev-role
+rules:
+  - apiGroups: [ "" ] # "" означает основную группу API
+    resources: [ "pods" ]
+    verbs: [get, list, watch, create, update, delete] # Действия, разрешенные для подов
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: [get, list, watch, create, update, delete] # Действия, разрешенные для деплойментов
+
+
+    
