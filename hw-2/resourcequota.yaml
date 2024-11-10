@@ -1,0 +1,17 @@
+---
+# resourcequota.yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: dev-team-quota
+  namespace: dev-team
+spec:
+  hard:
+    pods: "16"                     # Максимум 16 подов
+    requests.cpu: "8"              # Лимит CPU на запросы в 4 ядра
+    requests.memory: "8Gi"         # Лимит на запрос памяти в 8 ГБ
+    limits.cpu: "8"                # Максимально доступный CPU
+    limits.memory: "16Gi"          # Максимально доступная память
+
+
+  
