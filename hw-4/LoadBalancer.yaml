@@ -1,0 +1,15 @@
+---
+#
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-loadbalancer
+spec:
+  selector:
+    app: nginx-deployment
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+      name: tcp
+  type: LoadBalancer
