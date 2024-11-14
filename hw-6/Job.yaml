@@ -1,0 +1,19 @@
+---
+# Job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  activeDeadlineSeconds: 10
+  template:
+    spec:
+      containers:
+        - name: my-container
+          image: python:3.12
+          command: [ "python", "-c" ]
+          args: [ "pridsnt('Hello from the Kubernetes job')" ]
+      restartPolicy: Never
+  backoffLimit: 4
+  ttlSecondsAfterFinished: 120
+  
