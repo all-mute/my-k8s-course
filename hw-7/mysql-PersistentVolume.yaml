@@ -1,0 +1,50 @@
+---
+#
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-0
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: mysql-storage
+  hostPath:
+    path: "/data-kubernetes/mysql-0"  # Укажите конкретную папку на узле для пода mysql-0
+
+---
+#
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-1
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: mysql-storage
+  hostPath:
+    path: "/data-kubernetes/mysql-1"  # Укажите конкретную папку на узле для пода mysql-1
+
+---
+#
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-2
+spec:
+  capacity:
+    storage: 3Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: mysql-storage
+  hostPath:
+    path: "/data-kubernetes/mysql-2"  # Укажите конкретную папку на узле для пода mysql-2
+
+
+  

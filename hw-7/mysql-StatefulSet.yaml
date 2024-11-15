@@ -1,0 +1,60 @@
+---
+#
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mysql
+spec:
+  serviceName: "mysql"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:9.1.0
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-password
+              key: MYSQL_ROOT_PASSWORD  # Ключ, по которому будет извлечено значение пароля
+        - name: HOSTNAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+#        - name: POD_INDEX
+#          valueFrom:
+#            fieldRef:
+#              fieldPath: metadata.name # Имя пода
+        volumeMounts:
+        - name: mysql-storage
+          mountPath: /var/lib/mysql  # Путь, где MySQL сохраняет данные
+
+        - name: mysql-config-volume
+          #mountPath: /etc/mysql/conf.d/custom.cnf
+          mountPath: /etc/mysql/my.cnf
+          subPath: my-$(HOSTNAME).cnf
+
+      volumes:
+        - name: mysql-config-volume
+          configMap:
+            name: mysql-config  # Имя ConfigMap, в котором хранятся настройки MySQL
+
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "mysql-storage"
+      resources:
+        requests:
+          storage: 3Gi
