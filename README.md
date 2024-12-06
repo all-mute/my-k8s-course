@@ -1,5 +1,6 @@
 # Course: Kubernetes
 
+
 ---
 ### 1. Основы Kubernetes
 - **Читай**: Основные понятия Kubernetes — Pod, Node, Cluster, Namespace, Label и Selector.
